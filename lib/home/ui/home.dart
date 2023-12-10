@@ -18,7 +18,7 @@ class HomeApp extends StatefulWidget {
 class _HomeAppState extends State<HomeApp> {
   void cargarhome(){}
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Scaffold(
       appBar: AppBar(
         title: const Text('Autochicken'),
@@ -39,10 +39,10 @@ class _HomeAppState extends State<HomeApp> {
             ]
           )
         ),
-        child:  const Column(
+        child:  Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-             Expanded(
+             const Expanded(
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                 children: <Widget>[
@@ -51,8 +51,8 @@ class _HomeAppState extends State<HomeApp> {
                 ],  
               ),
             ),
-            SizedBox(height: 40,),
-            Expanded(  
+            const SizedBox(height: 40,),
+            const Expanded(  
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: <Widget>[
@@ -61,7 +61,7 @@ class _HomeAppState extends State<HomeApp> {
                ],
               )
             ),
-            Expanded(
+            const Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -69,6 +69,25 @@ class _HomeAppState extends State<HomeApp> {
                 ],
               ),
             ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                    height: 50,
+                    width: 80,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Mycontrol()), // Reemplaza 'OtraPantalla()' con el nombre real de tu pantalla adicional
+                        );
+                      },
+                      child: const Text('Control manual'),
+                    ),
+              ),
+            ],
+          ),
+            
           ],
         ),
       )   
