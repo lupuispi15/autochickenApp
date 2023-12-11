@@ -23,24 +23,28 @@ class _CircularwidgetWaterState extends State<CircularwidgetWater> {
       actualizarDatosAgua();
     });
   }
+
   @override
   void dispose() {
     timer.cancel(); // Cancela el temporizador al destruir el widget
     super.dispose();
   }
-  
+
   Future<void> actualizarDatosAgua() async {
     try {
       double? data = await Firebasefunciones().getAgua();
       setState(() {
         aguaFuture = data;
       });
-    // ignore: empty_catches
-    } catch (error) {
-    }
+      // ignore: empty_catches
+    } catch (error) {}
   }
+
   @override
   Widget build(BuildContext context) {
+    if (aguaFuture! < 0.0 || aguaFuture! > 1.0) {
+      aguaFuture = 0.0;
+    }
     return CircularPercentIndicator(
       radius: 70,
       lineWidth: 13.0,
@@ -64,5 +68,4 @@ class _CircularwidgetWaterState extends State<CircularwidgetWater> {
       progressColor: Colors.lightBlue,
     );
   }
-
 }

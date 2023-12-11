@@ -24,12 +24,13 @@ class _CircularwidgetFood2State extends State<CircularwidgetFood2> {
       actualizarDatos();
     });
   }
+
   @override
   void dispose() {
     timer.cancel(); // Cancela el temporizador al destruir el widget
     super.dispose();
   }
-  
+
   Future<void> actualizarDatos() async {
     try {
       double? datas = await Firebasefunciones().getComida();
@@ -41,29 +42,33 @@ class _CircularwidgetFood2State extends State<CircularwidgetFood2> {
       print('Error al obtener datos: $error');
     }
   }
+
   @override
   Widget build(BuildContext context) {
-           return CircularPercentIndicator(
-             radius: 70,
-             lineWidth: 16.0,
-             animation: true,
-             percent: comidaf!,
-             center: Text(
-               "${(comidaf! * 100).toStringAsFixed(1)}%",
-               style: const TextStyle(
-                 fontWeight: FontWeight.bold,
-                 fontSize: 20.0,
-                ),
-              ),
-             footer: const Text(
-               "Comida disponible",
-               style: TextStyle(
-                 fontWeight: FontWeight.bold,
-                 fontSize: 17.0,
-                ),
-              ),
-             circularStrokeCap: CircularStrokeCap.round,
-             progressColor: const Color.fromARGB(255, 244, 180, 3),
-            ); 
+    if (comidaf! < 0.0 || comidaf! > 1.0) {
+      comidaf = 0.0;
+    }
+    return CircularPercentIndicator(
+      radius: 70,
+      lineWidth: 16.0,
+      animation: true,
+      percent: comidaf!,
+      center: Text(
+        "${(comidaf! * 100).toStringAsFixed(1)}%",
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+        ),
+      ),
+      footer: const Text(
+        "Comida disponible",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17.0,
+        ),
+      ),
+      circularStrokeCap: CircularStrokeCap.round,
+      progressColor: const Color.fromARGB(255, 244, 180, 3),
+    );
   }
 }
