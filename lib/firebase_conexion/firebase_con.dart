@@ -78,5 +78,24 @@ class Firebasefunciones {
     }
     return null;
   }
+  Future<int?> getFoco() async{
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    final snapshot = await databaseReference
+    .child('controles')
+    .orderByChild('focomanual')
+    .once();
+    if (snapshot.snapshot.value !=null) {
+      for (final childSnapshot in snapshot.snapshot.children) {
+        if (childSnapshot.key == "focomanual") {
+          String foco = childSnapshot.value.toString();
+          int? valorfoco = int.tryParse(foco);
+          if (valorfoco != null) {
+           return valorfoco;
+          }
+        }
+      }
+    }
+    return null;
+  }
 }
 
